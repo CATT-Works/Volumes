@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Folders specific for this project
+#Added 2020-04-18
+Example/models
+Example/results
+Example/tmpdata
+MetricImgs
+
