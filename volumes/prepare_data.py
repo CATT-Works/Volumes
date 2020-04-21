@@ -226,8 +226,9 @@ def prepare_df(df, clear_monovalent = True, drop_zero_counts=True):
     for col in fillnacols:
         if col in df.columns:
             df[col] = df[col].fillna(0)
-        
-    df = df[df.count_total > 0]
+    
+    if drop_zero_counts:
+        df = df[df.count_total > 0]
     
     df = add_null_indicator(df)
 
