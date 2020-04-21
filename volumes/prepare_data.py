@@ -190,7 +190,22 @@ def change_values(df):
     df.loc[df.f_system==4, 'f_system'] = 3
     return df
 
-def prepare_df(df, clear_monovalent = True):    
+def prepare_df(df, clear_monovalent = True, drop_zero_counts=True):    
+    """
+    The main function that prepares a dataframe for machine learning. This is a wrapper for other
+    functions in prepare_data.py library. It works as follows:
+    - deletes unwanted stations and tmcs
+    - fills NaN values with zeros
+    - drops the rows where ATR counts is 0 or NaN (optional)
+    - filters data
+    - adds temporal information (holidays etc.)
+    - performs one-hot encoding
+    - drops monovalent columns (optional)
+    Arguments:
+        df               - dataframe that shall be preprocessed
+        clear_monovalent - if True (default) the monovalent columns are being dropped
+        drop_zero_counts - if True (default) drops ATR counts that are zero or None
+    """
     
     stations_to_delete = get_stations_to_delete()
     df = df[~df.count_location.isin(stations_to_delete)]
