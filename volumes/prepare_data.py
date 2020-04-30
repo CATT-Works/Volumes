@@ -76,10 +76,10 @@ def get_stations_to_delete():
     return stations
 
 def add_timemask(df):
-    mask = (df['datetime'] >= '2018-01-02') & (df['datetime'] < '2018-12-31 18:00')
+    mask = (df['datetime'] >= '2018-01-01') & (df['datetime'] < '2019-12-31 18:00')
     return df[mask]
 
-def add_holidays(df, holidays = 'MD2018'):
+def add_holidays(df, holidays = ['MD2018', 'MD2019']):
     """
     Adds information about holidays to the DataFrame
     Arguments:
@@ -130,8 +130,24 @@ def add_holidays(df, holidays = 'MD2018'):
         add_holiday(df, 'Election', '2018-11-06') 
         add_holiday(df, 'Veterans', '2018-11-11') # Veterans Day
         add_holiday(df, 'Thanksgiving', '2018-11-22') # Thanksgiving Day
+        add_holiday(df, 'Indian_Heritage', '2018-11-23') # Thanksgiving Day
         add_holiday(df, 'Chrismas1', '2018-12-25') # Chrismas 1
         add_holiday(df, 'Chrismas2', '2018-12-26') # Chrismas 2
+
+    if 'MD2019' in holidays:
+        add_holiday(df, 'New Year', '2019-01-01')
+        add_holiday(df, 'MLK_Birthday', '2019-01-21')
+        add_holiday(df, 'Presidents', '2019-02-18')    
+        add_holiday(df, 'Memorial', '2019-05-27')
+        add_holiday(df, 'Independence', '2019-07-04')
+        add_holiday(df, 'Labor', '2019-09-02')
+        add_holiday(df, 'Columbus', '2019-10-14') # Columbus Day
+        add_holiday(df, 'Veterans', '2019-11-11') # Veterans Day
+        add_holiday(df, 'Thanksgiving', '2019-11-28') # Thanksgiving Day
+        add_holiday(df, 'Indian_Heritage', '2019-11-29') # Thanksgiving Day
+        add_holiday(df, 'Chrismas1', '2019-12-25') # Chrismas 1
+        add_holiday(df, 'Chrismas2', '2019-12-26') # Chrismas 2
+        
         
     return df
 
@@ -148,7 +164,7 @@ def merge_speeds(df):
     return df
 
 def split_train_test_fixed(df):
-    test_tmcs = pickle.load(open("../Data/data_train/test_tmcs.p", "rb"))
+    test_tmcs = pickle.load(open("../Data/test_tmcs.p", "rb"))
     df_train = df[~df.tmc.isin(test_tmcs)]    
     df_test = df[df.tmc.isin(test_tmcs)]
     return df_train, df_test
