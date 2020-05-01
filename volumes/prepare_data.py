@@ -164,9 +164,9 @@ def merge_speeds(df):
     return df
 
 def split_train_test_fixed(df):
-    test_tmcs = pickle.load(open("../Data/test_tmcs.p", "rb"))
-    df_train = df[~df.tmc.isin(test_tmcs)]    
-    df_test = df[df.tmc.isin(test_tmcs)]
+    testCCS = pickle.load(open("../Data/test_CCS.p", "rb"))
+    df_train = df[~df.count_location.isin(testCCS)]    
+    df_test = df[df.count_location.isin(testCCS)]
     return df_train, df_test
 
 def add_null_indicator(df, columns = None):
