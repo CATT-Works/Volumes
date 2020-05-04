@@ -44,7 +44,7 @@ def normalize(hp, train, test = None, save_scaler = False):
     features_train = scaler.transform(train.astype(np.float64))
     
     if save_scaler:
-        pickle.dump(scaler, open('{}_scaler.p'.format(hp.PATH), 'wb'))
+        pickle.dump(scaler, open('{}_scaler.p'.format(hp.FILECORE_PATH), 'wb'))
 
     
     if test is not None:
@@ -222,7 +222,13 @@ def generate_results(df_test, pred, verbose = True):
         emfr = 100 * np.mean(tmp.MeanAbsErr / max_volume) 
         
         resdf.loc[tmc, "count_location"] = tmp.count_location.iloc[0]
-        #resdf.loc[tmc, "count_type"] = tmp.count_type.iloc[0]
+        
+        
+        if 'count_type' in tmp.columns:
+            resdf.loc[tmc, 'count_type'] = tmp.count_type.iloc[0]
+        if 'greater_harrisburg' in tmp.columns:
+            resdf.loc[tmc, 'greater_harrisburg'] = tmp.greater_harrisburg.iloc[0]
+    
         resdf.loc[tmc, "nr_points"] = len(tmp)
         resdf.loc[tmc, "r2"] = r2
         resdf.loc[tmc, "mape"] = mape
