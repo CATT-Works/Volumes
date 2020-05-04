@@ -268,6 +268,7 @@ def get_XY(df):
     drop_cols = [
         'tmc', 'tmc_linear', 'tmc_dir', 'unix_ts', 'date', 'time', 'dow',
         'count_type', 'count_location',
+        'count_subtype', 'count_location',
         'datetime', # Not original column, added in code
     ]
     drop_cols = [x for x in drop_cols if x in df.columns]
