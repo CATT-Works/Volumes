@@ -44,7 +44,7 @@ def normalize(hp, train, test = None, save_scaler = False):
     features_train = scaler.transform(train.astype(np.float64))
     
     if save_scaler:
-        pickle.dump(scaler, open('{}_scaler.p'.format(hp.FILECORE_PATH), 'wb'))
+        pickle.dump(scaler, open('{}_scaler.p'.format(hp.PATH), 'wb'))
 
     
     if test is not None:
@@ -110,27 +110,30 @@ def create_model(hp, n_inputs, gpus = None):
         return model, None
     
 
-def plot_train_valid_test(hp, train, valid, beautiful_plot = False, save_path = None):
+def plot_train_valid_test(hp, train, valid = None, beautiful_plot = False, save_path = None, fontsize=14):
     """
     Plots train and valid losses.
     Arguments: 
-        train, valid - losses (output from model.fit)
+        train, valid   - losses (output from model.fit). valid can be none.
         beatuiful_plot - if True, the beautiful version of the plot is produced
         save_path      - path to save the plot (default = None)
+        fontsize       - size of the font for beautiful plots
     """
     epochs = np.arange(len(train)) + 1
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
 
     ax1.plot(epochs, train, c='b', label='Train loss')
-    ax1.plot(epochs, valid, c='g', label='Valid loss')
+    
+    if valid is not None:
+        ax1.plot(epochs, valid, c='g', label='Valid loss')
     #ax1.set_ylim([0,1])
     
     if beautiful_plot:
         plt.gcf().subplots_adjust(bottom=0.20, left=0.20)
-        plt.legend(loc='upper right', fontsize=FONTSIZE);
-        plt.xlabel('Epochs', fontsize=FONTSIZE+2)
-        plt.ylabel('Loss', fontsize=FONTSIZE+2)
+        plt.legend(loc='upper right', fontsize=fontsize);
+        plt.xlabel('Epochs', fontsize=fontsize+2)
+        plt.ylabel('Loss', fontsize=fontsize+2)
         if hp.EPOCHS > 15:
             ticks = np.arange(5, hp.EPOCHS + 1, 5)
         elif hp.EPOCHS > 10:
@@ -139,8 +142,8 @@ def plot_train_valid_test(hp, train, valid, beautiful_plot = False, save_path = 
             ticks = np.arange(1, hp.EPOCHS + 1, 1)
             
         ax1.set_xticks(ticks)
-        plt.xticks(fontsize=FONTSIZE)
-        plt.yticks(fontsize=FONTSIZE)    
+        plt.xticks(fontsize=fontsize)
+        plt.yticks(fontsize=fontsize)    
 
         plt.grid(True)
     else:
@@ -222,13 +225,7 @@ def generate_results(df_test, pred, verbose = True):
         emfr = 100 * np.mean(tmp.MeanAbsErr / max_volume) 
         
         resdf.loc[tmc, "count_location"] = tmp.count_location.iloc[0]
-        
-        
-        if 'count_type' in tmp.columns:
-            resdf.loc[tmc, 'count_type'] = tmp.count_type.iloc[0]
-        if 'greater_harrisburg' in tmp.columns:
-            resdf.loc[tmc, 'greater_harrisburg'] = tmp.greater_harrisburg.iloc[0]
-    
+        #resdf.loc[tmc, "count_type"] = tmp.count_type.iloc[0]
         resdf.loc[tmc, "nr_points"] = len(tmp)
         resdf.loc[tmc, "r2"] = r2
         resdf.loc[tmc, "mape"] = mape

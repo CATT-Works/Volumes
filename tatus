@@ -1,0 +1,58 @@
+[33mcommit 191b5c44d83a08f7231614b9e50fc07dda2308c7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Mon May 4 07:11:04 2020 -0400
+
+    fix/feat: hp and scaler saving / Results generation
+    - fix: hp and scaler are using FILECORE_PATH to be saved now
+    - feat: count_type and greater_harrisburg columns added to short results
+            if these column exists (for compatibility with PA
+
+[33mcommit 1e6413844218d98ea6427e309d8e427be34ee02a[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Mon May 4 06:51:47 2020 -0400
+
+    feat: getXY works with PA dataset now
+
+[33mcommit 34005ecc7c62a452e8c280eb2ca306b4fd14cd58[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Fri May 1 05:16:55 2020 -0400
+
+    fix: fixed_train_test_split corrected
+
+[33mcommit 8f80dcc8c018dd871c0d05383d0f14b5b5868290[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Thu Apr 30 16:46:17 2020 -0400
+
+    feat: Holidays for MD 2019 added
+
+[33mcommit 92eecfa8e0604a3fc63e0283fd79587d2ce6b161[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Thu Apr 23 12:07:20 2020 -0400
+
+    feat: Filtering Results added
+    This feature filters results based on data stored in .xlsx files.
+    Everything is in ./FilterResults folder.
+
+[33mcommit f317642b1e705f6c477ebc7c40a24788fefc090e[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Tue Apr 21 15:41:55 2020 -0400
+
+    fix: drop_zero_counts in prepare_df corrected
+
+[33mcommit 850e2582d326e32d48ca11b4fe345701e06f57a6[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Tue Apr 21 15:29:17 2020 -0400
+
+    feat: drop_zero_counts argument added to prepare_df()
+
+[33mcommit fcb38228cf4d4b010b94c4877b196b870bc9d019[m
+Author: Przemek S <psekula@umd.edu>
+Date:   Sat Apr 18 12:40:01 2020 -0400
+
+    First Commit - Based on MD 2018
+
+[33mcommit 94b07384e8960ab2b4cb45fb8946c17ce03bcf59[m
+Author: PrzemekSekula <34615118+PrzemekSekula@users.noreply.github.com>
+Date:   Sat Apr 18 15:49:07 2020 +0200
+
+    Initial commit
